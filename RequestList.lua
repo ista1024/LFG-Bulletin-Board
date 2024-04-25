@@ -870,6 +870,26 @@ function GBB.FoldAllDungeon()
 	GBB.UpdateList()
 end
 
+function GBB.CollapseAllDungeon()
+	if GBB.FoldedDungeons==nil or GBB.FoldedDungeons==0 then
+		return 
+	end
+
+	local isAllCollapsed = false;
+	for k,v in pairs(GBB.FoldedDungeons) do
+		if v == false then
+			isAllCollapsed = true;
+			break;
+		end
+	end
+
+	for k,v in pairs(GBB.FoldedDungeons) do
+		GBB.FoldedDungeons[k]=isAllCollapsed
+	end
+
+	GBB.UpdateList()
+end
+
 local function createMenu(DungeonID,req)
 	if not GBB.PopupDynamic:Wipe("request"..(DungeonID or "nil")..(req and "request" or "nil")) then
 		return

@@ -252,6 +252,10 @@ function GBB.BtnRefresh(button)
 	GBB.UpdateLfgTool()
 end
 
+--Collapse
+function GBB.BtnCollapse(button)
+	GBB.CollapseAllDungeon()
+end
 
 --Tag Lists
 -------------------------------------------------------------------------------------

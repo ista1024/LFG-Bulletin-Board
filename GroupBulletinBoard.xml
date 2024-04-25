@@ -102,6 +102,18 @@
 				</Scripts>
 			</Button>
 
+			<!-- collapse -->
+			<Button name="$parentCollapseButton" inherits="GroupBulletinBoard_MiniButton" Text="|TInterface\Buttons\UI-RefreshButton:0|t">
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parentRefreshButton" relativePoint="LEFT"/>
+				</Anchors>
+				<Scripts>
+					<OnMouseDown>
+						GroupBulletinBoard_Addon.BtnCollapse(button )
+					</OnMouseDown>
+				</Scripts>
+			</Button>
+
 			<!-- announcebox -->
 			<Button name="$parentSelectChannel" inherits="UIPanelButtonTemplate" text="channel">
 				<Anchors>
