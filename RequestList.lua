@@ -875,18 +875,14 @@ function GBB.CollapseAllDungeon()
 		return 
 	end
 
-	local isAllCollapsed = false;
 	for k,v in pairs(GBB.FoldedDungeons) do
 		if v == false then
-			isAllCollapsed = true;
-			break;
+			GBB.FoldAllDungeon()
+			GBB.UpdateList()
+			return
 		end
 	end
-
-	for k,v in pairs(GBB.FoldedDungeons) do
-		GBB.FoldedDungeons[k]=isAllCollapsed
-	end
-
+	GBB.UnfoldAllDungeon()
 	GBB.UpdateList()
 end
 
