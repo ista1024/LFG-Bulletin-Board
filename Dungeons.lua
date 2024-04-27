@@ -14,7 +14,7 @@ end
 
 local function getPvpByVersion()
 	local version, build, date, tocversion = GetBuildInfo()
-	if string.sub(version, 1, 2) ~= "1." then
+	if not GBB.IsVanilla then
 		return GBB.PvpNames
 	end
 	return GBB.PvpSodNames
@@ -782,7 +782,7 @@ function GBB.GetDungeonSort()
 		else
 			table.insert(GBB.DebugNames, 1, eventName)
 		end
-    end
+	end
 
 	local dungeonOrder = { GBB.VanillDungeonNames, GBB.TbcDungeonNames, GBB.WotlkDungeonNames, GBB.PvpNames, GBB.Misc, GBB.DebugNames}
 

@@ -237,7 +237,7 @@ function GBB.OptionsInit ()
 
 
 	local version, build, date, tocversion = GetBuildInfo()
-	if string.sub(version, 1, 2) ~= "1." then
+	if not GBB.IsVanilla then
 
 		GBB.Options.AddPanel(GBB.L["WotlkPanelFilter"])
 		GBB.Options.AddCategory(GBB.L["HeaderDungeon"])
@@ -327,7 +327,7 @@ function GBB.OptionsInit ()
 		ChkBox_FilterDungeon[index]=CheckBoxFilter(GBB.dungeonSort[index],true)
 	end
 
-	if string.sub(version, 1, 2) == "1." then
+	if GBB.IsVanilla then
 		for index=GBB.ENDINGDUNGEONSTART,GBB.ENDINGDUNGEONEND do
 			ChkBox_FilterDungeon[index]=CheckBoxFilter(GBB.dungeonSort[index],true)
 		end
@@ -336,7 +336,7 @@ function GBB.OptionsInit ()
 
 	
 	--GBB.Options.AddSpace()
-	if string.sub(version, 1, 2) == "1." then
+	if GBB.IsVanilla then
 		CheckBoxChar("FilterLevel",false)
 		CheckBoxChar("DontFilterOwn",false)
 		CheckBoxChar("HeroicOnly", false)
@@ -353,9 +353,8 @@ function GBB.OptionsInit ()
 	end)
 	GBB.Options.EndInLine()
 	GBB.Options.Indent(-10)
-	if string.sub(version, 1, 2) == "1." then
+	if GBB.IsVanilla then
 		SetChatOption()
-		
 	end
 	-- Tags
 	GBB.Options.AddPanel(GBB.L["PanelTags"],false,true)

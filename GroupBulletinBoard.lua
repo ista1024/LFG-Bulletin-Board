@@ -213,7 +213,7 @@ function GBB.ShowWindow()
 	local version, build, date, tocversion = GetBuildInfo()
 
     -- Check if classic or not
-    if string.sub(version, 1, 2) ~= "1." then
+    if not GBB.IsVanilla then
 		GBB.UpdateLfgTool()
 		GBB.UpdateGroupList()
     end
