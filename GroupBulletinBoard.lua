@@ -407,6 +407,8 @@ function GBB.Init()
 	GBB.UserName=(UnitFullName("player"))
 	GBB.ServerName=GetRealmName()
 
+	GBB.IsVanilla=GBB.CheckIsVanilla()
+	
 	-- Initalize options
 	if not GroupBulletinBoardDB then GroupBulletinBoardDB = {} end -- fresh DB
 	if not GroupBulletinBoardDBChar then GroupBulletinBoardDBChar = {} end -- fresh DB
@@ -796,3 +798,10 @@ function GBB.OnUpdate(elapsed)
 	end
 end
 
+function GBB.CheckIsVanilla()
+	local version, build, date, tocversion = GetBuildInfo()
+	if string.sub(version, 1, 2) == "1." then
+		return true
+	end
+	return false
+end
