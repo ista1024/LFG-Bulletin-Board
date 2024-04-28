@@ -17,6 +17,8 @@ GBB.TxtEscapePicture="|T%s:0|t"
 --"Interface\\Icons\\spell_holy_prayerofshadowprotection"
 GBB.NotifySound=1210
 
+GBB.IsVanilla=(WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
+GBB.IsVanillaSod=GBB.IsVanilla and C_Seasons.GetActiveSeason() == Enum.SeasonID.SeasonOfDiscovery
 
 local PartyChangeEvent={ "GROUP_JOINED", "GROUP_ROSTER_UPDATE", "RAID_ROSTER_UPDATE","GROUP_LEFT","LOADING_SCREEN_DISABLED","PLAYER_ENTERING_WORLD", "PLAYER_REGEN_DISABLED", "PLAYER_ENTERING_WORLD"}
 
@@ -214,8 +216,8 @@ function GBB.ShowWindow()
 
     -- Check if classic or not
     if not GBB.IsVanilla then
-		GBB.UpdateLfgTool()
-		GBB.UpdateGroupList()
+			GBB.UpdateLfgTool()
+			GBB.UpdateGroupList()
     end
 	GroupBulletinBoardFrame:Show()
 	GBB.ClearNeeded=true	 
@@ -406,8 +408,6 @@ function GBB.Init()
 	GBB.UserLevel=UnitLevel("player")
 	GBB.UserName=(UnitFullName("player"))
 	GBB.ServerName=GetRealmName()
-
-	GBB.IsVanilla=GBB.CheckIsVanilla()
 	
 	-- Initalize options
 	if not GroupBulletinBoardDB then GroupBulletinBoardDB = {} end -- fresh DB
@@ -609,7 +609,7 @@ function GBB.Init()
 	local version, build, date, tocversion = GetBuildInfo()
 
 	GBB.InitGroupList()
-	if string.sub(version, 1, 2) == "1." then
+	if GBB.IsVanilla then
 		GBB.Tool.AddTab(GroupBulletinBoardFrame,GBB.L.TabRequest,GroupBulletinBoardFrame_ScrollFrame)
 	else
 		GBB.Tool.AddTab(GroupBulletinBoardFrame,GBB.L.TabRequest,GroupBulletinBoardFrame_ScrollFrame)
@@ -798,10 +798,7 @@ function GBB.OnUpdate(elapsed)
 	end
 end
 
-function GBB.CheckIsVanilla()
-	local version, build, date, tocversion = GetBuildInfo()
-	if string.sub(version, 1, 2) == "1." then
-		return true
-	end
-	return false
+function GBB.CheckIsVanillaSod()
+	return C_Seasons.GetActiveSeason() == Enum.SeasonID.SeasonOfDiscovery
 end
+
